@@ -7,7 +7,7 @@ def main(args):
     elif args.task == "summarization":
         sample_input = {"text": f"Summarize the following dialogue that is delimited with triple backticks. ### Dialogue:  {args.text} ### Summary: "}
 
-    response = requests.post("http://127.0.0.1:8000/", json=sample_input)
+    response = requests.post("http://127.0.0.1:8000/", json=sample_input, timeout=60)
     print(response.text)
 
 if __name__ == "__main__":

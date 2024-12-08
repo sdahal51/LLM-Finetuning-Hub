@@ -49,7 +49,7 @@ def palmyra_api_call(prompt: str, max_new_tokens: int, top_p: float=0.95, temper
     if len(prompt) >= 2050:
         return {"choices": [{"text": ""}]}
 
-    response = requests.post(url, json=payload, headers=headers)
+    response = requests.post(url, json=payload, headers=headers, timeout=60)
     # Handle failed calls
     while response.status_code != 200:
         # There's a safety filter that sometimes pops up
@@ -57,7 +57,7 @@ def palmyra_api_call(prompt: str, max_new_tokens: int, top_p: float=0.95, temper
             return {"choices": [{"text": ""}]}
         time.sleep(1)
         print(f"FAILED: {response.status_code}; RETRYING...")
-        response = requests.post(url, json=payload, headers=headers)
+        response = requests.post(url, json=payload, headers=headers, timeout=60)
 
     return response.json()
 
