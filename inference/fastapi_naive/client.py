@@ -2,7 +2,7 @@ import argparse
 import requests
 
 def send_request(url, prompt):
-    response = requests.post(url, json={"prompt": prompt})
+    response = requests.post(url, json={"prompt": prompt}, timeout=60)
     
     if response.status_code == 200:
         return response.json()["prediction"]
