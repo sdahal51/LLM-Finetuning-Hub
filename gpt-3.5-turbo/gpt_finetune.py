@@ -18,6 +18,7 @@ from sklearn.metrics import (
     precision_score,
     recall_score,
 )
+import fickling
 
 # Obtain from OpenAI's website
 openai.organization = os.getenv("OPENAI_ORG_KEY")
@@ -149,7 +150,7 @@ def infer_finetuned_model(args):
     results, labels = [], []
     if os.path.exists(save_path):
         with open(save_path, "rb") as handle:
-            metrics = pickle.load(handle)
+            metrics = fickling.load(handle)
             results = metrics["predictions"]
             labels = metrics["labels"]
             ctr = len(results)

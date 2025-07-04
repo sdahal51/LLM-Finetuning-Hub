@@ -22,6 +22,7 @@ from sklearn.metrics import (
     precision_score,
     recall_score,
 )
+import fickling
 
 metric = evaluate.load("rouge")
 warnings.filterwarnings("ignore")
@@ -121,7 +122,7 @@ def main(args):
     # Load existing results
     if os.path.exists(os.path.join(save_dir, "metrics.pkl")):
         with open(os.path.join(save_dir, "metrics.pkl"), "rb") as handle:
-            metrics = pickle.load(handle)
+            metrics = fickling.load(handle)
             results = metrics["predictions"]
             good_labels = metrics["labels"]
             good_data = metrics["data"]
